@@ -12,7 +12,8 @@ int main(void) {
 		zmq::message_t request;
 
 		zmq::recv_result_t res = socket.recv(request, zmq::recv_flags::none);
-		cout << res.value() << '\n';
+		string rec_str(static_cast<char*>(request.data()), request.size());
+		cout << rec_str << " " << res.value() << '\n';
 
 		sleep(1);  // emulate doing some work
 

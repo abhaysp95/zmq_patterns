@@ -1,5 +1,4 @@
 #include <cstring>
-#include <sstream>
 #include<zmq.hpp>
 #include<iostream>
 
@@ -22,9 +21,10 @@ int main(void) {
 		// get reply
 		zmq::message_t rep;
 		zmq::recv_result_t res = socket.recv(rep, zmq::recv_flags::none);
-		std::istringstream iss(static_cast<char*>(rep.data()));
-		string recv_msg{};
-		iss >> recv_msg;
+
+		// use res.value() or rep.size() to determine message size
+		string recv_msg(static_cast<char*>(rep.data()), res.value());
+
 		cout << "recieved " << recv_msg << " " << req_nbr << endl;
 	}
 
