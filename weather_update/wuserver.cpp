@@ -15,7 +15,7 @@ int get_within(int x) {
 int main(void) {
 	zmq::context_t ctx(1);
 	zmq::socket_t publisher(ctx, zmq::socket_type::pub);
-	publisher.bind("tcp://*6565");
+	publisher.bind("tcp://*:6565");
 	publisher.bind("ipc://weather.ipc");
 
 	while (true) {
